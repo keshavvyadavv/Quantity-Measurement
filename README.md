@@ -1,4 +1,4 @@
-# 📏 QuantityMeasurement - Feet
+# QuantityMeasurement - Feet
 
 A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
 
