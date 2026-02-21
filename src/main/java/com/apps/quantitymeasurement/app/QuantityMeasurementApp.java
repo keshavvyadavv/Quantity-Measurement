@@ -1,32 +1,46 @@
 package com.apps.quantitymeasurement.app;
-import com.apps.quantitymeasurement.domain.Feet;
-import com.apps.quantitymeasurement.domain.Inches;
-import com.apps.quantitymeasurement.domain.InvalidFeetException;
+import java.util.Scanner;
+import com.apps.quantitymeasurement.domain.LengthUnit;
+import com.apps.quantitymeasurement.domain.Quantity;
 public class QuantityMeasurementApp {
 	
-	public static boolean checkFeetEquality(String first , String second) {
-		Feet f1 = Feet.fromString(first);
-		Feet f2 = Feet.fromString(second);
-		return f1.equals(f2);
-	}
-	
-	public static boolean checkInchesEquality(String first , String second) {
-		Inches i1 = Inches.fromString(first);
-		Inches i2 = Inches.fromString(second);
-		return i1.equals(i2);
+	public static boolean checkEquality(double value1 , LengthUnit unit1, double value2 , LengthUnit unit2) {
+		Quantity q1 = new Quantity(value1 , unit1);
+		Quantity q2 = new Quantity(value2 , unit2);
+		
+		return q1.equals(q2);
 	}
 	
 	public static void main(String[] args) {
-		
+		Scanner scanner = new Scanner(System.in);
 		try {
-			System.out.println("Input: 1.0 inch and 1.0 inch");
-			System.out.println("Output: Equal (" + checkInchesEquality("1.0" , "1.0") + ")");
 			
-			System.out.println("Input: 1.0 ft and 1.0 ft");
-			System.out.println("Output: Equal (" + checkFeetEquality("1.0","1.0") + ")");
+			System.out.println("Enter first value:");
+            double value1 = Double.parseDouble(scanner.nextLine());
 
-	    } catch (InvalidFeetException e) {
-	        System.out.println("Error: " + e.getMessage());
-	    }
+            System.out.println("Enter first unit (feet/inch):");
+            LengthUnit unit1 = LengthUnit.fromString(scanner.nextLine());
+
+            System.out.println("Enter second value:");
+            double value2 = Double.parseDouble(scanner.nextLine());
+
+            System.out.println("Enter second unit (feet/inch):");
+            LengthUnit unit2 = LengthUnit.fromString(scanner.nextLine());
+
+            Quantity q1 = new Quantity(value1, unit1);
+            Quantity q2 = new Quantity(value2, unit2);
+
+            boolean result = q1.equals(q2);
+
+            System.out.println();
+            System.out.println("Input: " + q1 + " and " + q2);
+            System.out.println("Output: Equal (" + result + ")");
+		} catch (NumberFormatException e) {
+            System.out.println("Invalid number entered.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
 	}
 }
