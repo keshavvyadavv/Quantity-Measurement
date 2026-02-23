@@ -1,73 +1,29 @@
-# 📏 QuantityMeasurement - Feet
+# UC5 – Unit-to-Unit Conversion
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+UC5 adds direct conversion between length units using a common base unit.
 
----
+## Supported Units
+
+FEET, INCHES, YARDS, CENTIMETERS
 
 ## Features
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+* Static `convert(value, source, target)` method
+* Instance `convertTo()` method
+* Base unit normalization
+* Input validation (null, NaN, infinite)
+* Immutable value object
 
----
-
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
+## Formula
 
 ```
+result = value × (source.factor / target.factor)
+```
 
----
+## Example
 
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
+* 1 FEET → INCHES = 12
+* 3 YARDS → FEET = 9
+* 36 INCHES → YARDS = 1
 
 ---
