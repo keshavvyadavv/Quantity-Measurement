@@ -2,7 +2,6 @@ package com.apps.quantitymeasurement.domain;
 
 import java.util.Objects;
 
-import com.apps.quantitymeasurement.domain.Length.LengthUnit;
 
 public class Quantity {
 	private final double value;
@@ -20,9 +19,6 @@ public class Quantity {
         this.unit = unit;
 	}
 	
-	public Length.LengthUnit getUnit() {
-        return unit;
-    }
 	
 	public double getValue() {
 		return value;
@@ -47,7 +43,17 @@ public class Quantity {
 
         return new Quantity(result, targetUnit);
     }
-	
+
+	public Quantity convertTo(LengthUnit targetUnit) {
+        if (targetUnit == null) {
+            throw new IllegalArgumentException("Target unit cannot be null");
+        }
+
+        double baseValue = this.toBase();
+        double converted = targetUnit.convertFromBaseUnit(baseValue);
+
+        return new Quantity(converted, targetUnit);
+    }
 	@Override
 	public boolean equals(Object obj) {
         if (this == obj) return true;
