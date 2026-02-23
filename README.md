@@ -1,73 +1,33 @@
-# 📏 QuantityMeasurement - Feet
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+# UC6 – Addition of Two Length Units
 
----
+UC6 extends UC5 by adding support for **addition of two length measurements** (same category).
+
+## Supported Units
+
+FEET, INCHES, YARDS, CENTIMETERS
 
 ## Features
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+* Add two `Length` objects
+* Automatic unit conversion before addition
+* Result returned in unit of first operand
+* Uses base unit normalization (FEET)
+* Immutable design (returns new object)
+* Input validation for null, NaN, infinite values
 
----
+## Logic
 
-```
-## 📂 Folder Structure
+1. Convert both lengths to base unit (FEET)
+2. Add values
+3. Convert sum back to first operand’s unit
+4. Return new `Length` object
 
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
+## Example
 
-```
-
----
-
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
+* 1 FEET + 2 FEET = 3 FEET
+* 1 FEET + 12 INCHES = 2 FEET
+* 12 INCHES + 1 FEET = 24 INCHES
+* 1 YARD + 3 FEET = 2 YARDS
 
 ---
