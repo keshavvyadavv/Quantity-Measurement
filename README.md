@@ -1,73 +1,19 @@
-# 📏 QuantityMeasurement - Feet
+# UC12 – Subtraction & Division on Quantity
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+## Description
+UC12 extends the generic `Quantity<U extends IMeasurable>` system by adding:
 
----
+- Subtraction → returns new `Quantity<U>`
+- Division → returns dimensionless `double`
+
+No architectural changes required.
 
 ## Features
+- Cross-unit arithmetic (same category)
+- Explicit & implicit target unit
+- Cross-category prevention
+- Division by zero handling
+- Immutability preserved
+- Works for Length, Weight, Volume
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
 
----
-
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
-
-```
-
----
-
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
-
----
