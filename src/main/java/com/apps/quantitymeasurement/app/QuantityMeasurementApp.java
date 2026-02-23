@@ -4,29 +4,32 @@ import java.util.Scanner;
 import com.apps.quantitymeasurement.domain.Length;
 import com.apps.quantitymeasurement.domain.LengthUnit;
 import com.apps.quantitymeasurement.domain.Quantity;
+import com.apps.quantitymeasurement.domain.QuantityWeight;
+import com.apps.quantitymeasurement.domain.WeightUnit;
 public class QuantityMeasurementApp {
 	
 	public static void main(String[] args) {
-		Quantity q1 = new Quantity(1.0, LengthUnit.FEET);
-        Quantity q2 = new Quantity(12.0, LengthUnit.INCHES);
-        System.out.println("Convert 1 FEET to INCHES:");
-        System.out.println(q1.convertTo(LengthUnit.INCHES));
-        System.out.println();
-        
-        System.out.println("Add 1 Feet + 12 INChES (in FEET):");
-        System.out.println(q1.add(q2, LengthUnit.FEET));
+		QuantityWeight w1 = new QuantityWeight(1.0,  WeightUnit.KILOGRAM);
+        QuantityWeight w2 = new QuantityWeight(1000.0 , WeightUnit.GRAM);
+
+        System.out.println("1 kg equals 1000 g ??");
+        System.out.println(w1.equals(w2));
 
         System.out.println();
 
-        System.out.println("Add 1 FEET + 12 inches (in YARDS):");
-        System.out.println(q1.add(q2, LengthUnit.YARDS));
+        QuantityWeight w3 = new QuantityWeight(2.0, WeightUnit.POUND);
+        System.out.println("2 pounds to kg:");
+        System.out.println(w3.convertTo(WeightUnit.KILOGRAM));
 
         System.out.println();
 
-        Quantity q3 = new Quantity(36.0, LengthUnit.INCHES);
-        Quantity q4 = new Quantity(1.0, LengthUnit.YARDS);
+        QuantityWeight w4 = new QuantityWeight(500.0, WeightUnit.GRAM);
+        System.out.println("1 kg + 500 g:");
+        System.out.println(w1.add(w4));
 
-        System.out.println("36 INCHES equals 1 yards?");
-        System.out.println(q3.equals(q4));
+        System.out.println();
+
+        System.out.println("1 kg + 1000 g (in GRAM):");
+        System.out.println(w1.add(w2, WeightUnit.GRAM));
 	}
 }
