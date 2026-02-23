@@ -9,25 +9,17 @@ public class QuantityMeasurementApp {
 	
 	public static void main(String[] args) {
 	
-		Quantity<VolumeUnit> oneLitre = new Quantity<>(1.0, VolumeUnit.LITRE);
+        System.out.println(new Quantity<>(10.0, LengthUnit.FEET).subtract(new Quantity<>(6.0, LengthUnit.INCHES)));
 
-        Quantity<VolumeUnit> thousandML = new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
+        System.out.println(new Quantity<>(5.0, VolumeUnit.LITRE).subtract(new Quantity<>(500.0, VolumeUnit.MILLILITRE)));
+        System.out.println(new Quantity<>(10.0, LengthUnit.FEET).divide(new Quantity<>(2.0, LengthUnit.FEET)));
 
-        Quantity<VolumeUnit> oneGallon = new Quantity<>(1.0, VolumeUnit.GALLON);
+        System.out.println(new Quantity<>(24.0, LengthUnit.INCHES).divide(new Quantity<>(2.0, LengthUnit.FEET)));
 
-        System.out.println(oneLitre.equals(thousandML));   
-        System.out.println(oneGallon.equals(new Quantity<>(3.78541, VolumeUnit.LITRE))); 
-
-        System.out.println(oneLitre.convertTo(VolumeUnit.MILLILITRE));
-        System.out.println(oneGallon.convertTo(VolumeUnit.LITRE));
-
-        System.out.println(oneLitre.add(thousandML));
-
-        System.out.println(oneLitre.add(oneGallon, VolumeUnit.MILLILITRE));
-
-        Quantity<LengthUnit> oneFoot = new Quantity<>(1.0, LengthUnit.FEET);
-
-        System.out.println(oneLitre.equals(oneFoot)); 
-		
+        try {
+            System.out.println( new Quantity<>(10.0, LengthUnit.FEET).divide(new Quantity<>(0.0, LengthUnit.FEET)));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 	}
 }

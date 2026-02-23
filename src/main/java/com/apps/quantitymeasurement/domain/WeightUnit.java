@@ -6,20 +6,18 @@ public enum WeightUnit implements IMeasurable{
     GRAM(0.001),
     POUND(0.453592);
 
-	private final double toKgFactor;
+	private final double factor;
 
-	WeightUnit(double toKgFactor) {
-        this.toKgFactor = toKgFactor;
+    WeightUnit(double factor) {
+        this.factor = factor;
     }
 
-	@Override
-    public double toBaseUnit(double value) {
-        return value * toKgFactor;
+	public double toBase(double value) {
+        return value * factor;
     }
 
-    @Override
-    public double fromBaseUnit(double baseValue) {
-        return baseValue / toKgFactor;
+    public double fromBase(double baseValue) {
+        return baseValue / factor;
     }
     
 }
