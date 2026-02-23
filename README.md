@@ -1,73 +1,20 @@
-# 📏 QuantityMeasurement - Feet
+# UC9 – Weight Measurement
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+## Description
+UC9 extends the Quantity Measurement Application to support **Weight Measurements** alongside Length.
 
----
+Supported Units:
+- **KILOGRAM (kg)** – Base unit
+- **GRAM (g)** – 1 g = 0.001 kg
+- **POUND (lb)** – 1 lb = 0.453592 kg
 
 ## Features
+- Equality comparison (cross-unit supported)
+- Unit conversion
+- Addition (implicit & explicit target unit)
+- Immutable design
+- Type-safe (Weight ≠ Length)
+- Uses epsilon (1e-6) for floating-point precision
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
-
----
-
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
-
-```
-
----
-
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
-
----
+## Conclusion
+UC9 validates scalable architecture by supporting multiple measurement categories without affecting existing length functionality.
