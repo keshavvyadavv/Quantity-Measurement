@@ -34,6 +34,9 @@ Quantity-Measurement
 │   │                       ├── Feet.java
 │   │                       └── InvalidFeetException.java
 │   │                       └── Inches.java
+│   │                       └── Length.java
+│   │                       └── LengthUnit.java
+│   │                       └── Quantity.java
 │   │
 │   └── test/
 │       └── java/
@@ -43,6 +46,7 @@ Quantity-Measurement
 │                       └── domain/
 │                           └── FeetTest.java
 │                           └── InchesTest.java
+│                           └── QuantityTest.java
 │
 ├── .gitignore
 ├── pom.xml
@@ -127,3 +131,32 @@ This eliminates code duplication and follows the DRY principle.
 🔗 *Code Link:*  
 👉 [UC-3](https://github.com/keshavvyadavv/Quantity-Measurement/tree/feature/UC3-GenericLength/src)
 
+---
+
+# Quantity Measurement – UC4
+
+## Supported Units
+
+* Feet
+* Inch
+* Yard
+* Centimeter
+
+## Features
+
+* Takes input from user
+* Converts units internally
+* Checks if two values are equal
+* Supports cross-unit comparison
+
+## Example
+
+1 Feet = 12 Inch
+3 Feet = 1 Yard
+2.54 Centimeter = 1 Inch
+
+
+🔗 *Code Link:*  
+👉 [UC-4](https://github.com/keshavvyadavv/Quantity-Measurement/tree/feature/UC4-YardEquality/src)
+
+---
