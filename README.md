@@ -1,73 +1,40 @@
-# 📏 QuantityMeasurement - Feet
+# Quantity Measurement – UC7
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+## Description
 
----
+This project performs **length addition and unit conversion** using OOP principles in Java.
+
+## Supported Units
+
+* FEET
+* INCHES
+* YARDS
+* CENTIMETERS
 
 ## Features
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+* Add two quantities
+* Automatic unit conversion
+* Result in chosen target unit
+* Equality comparison using base unit (FEET)
+* Immutable design
+* Input validation
 
----
-
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
+## Example
 
 ```
+1 FEET + 12 INCHES
 
----
+Output:
+2.0 feet
+24.0 inches
+0.6666666666666666 yards
+```
 
-## Test Cases Covered
+## Design
 
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
+* Base unit: FEET
+* Uses conversion factors
+* EPSILON-based equality comparison
 
 ---
