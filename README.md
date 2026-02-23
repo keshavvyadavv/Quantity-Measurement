@@ -1,16 +1,8 @@
 # Quantity-Measurement
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
-
----
-
-## Features
-
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+A scalable, generic measurement system built using Java Generics and interfaces.
+Supports Length, Weight, Volume, and Temperature with unit conversion, equality comparison, and selective arithmetic operations.
+Designed using SOLID principles, DRY architecture, functional interfaces, and type-safe generics for extensibility and maintainability.
 
 ---
 
@@ -31,11 +23,12 @@ Quantity-Measurement
 │   │                   │   └── QuantityMeasurementApp.java
 │   │                   │
 │   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │                       └── Inches.java
-│   │                       └── Length.java
+│   │                       ├── IMeasurable.java
 │   │                       └── LengthUnit.java
+│   │                       └── SupportsArithmetic.java
+│   │                       └── TemperatureUnit.java
+│   │                       └── VolumeUnit.java
+│   │                       └── WeightUnit.java
 │   │                       └── Quantity.java
 │   │
 │   └── test/
@@ -44,8 +37,6 @@ Quantity-Measurement
 │               └── apps/
 │                   └── quantitymeasurement/
 │                       └── domain/
-│                           └── FeetTest.java
-│                           └── InchesTest.java
 │                           └── QuantityTest.java
 │
 ├── .gitignore
@@ -56,6 +47,16 @@ Quantity-Measurement
 
 ---
 
+# UC1-FeetEquality
+
+## Features
+
+- Immutable `Feet` class  
+- Factory method `fromString()`  
+- Custom exception `InvalidFeetException`  
+- Proper `equals()` and `hashCode()` implementation  
+- Unit testing using JUnit 5  
+
 ## Test Cases Covered
 
 - Same value comparison  
@@ -64,10 +65,6 @@ Quantity-Measurement
 - Different type comparison  
 - Valid string input  
 - Invalid string input (Exception case)  
-
----
-
-## Example Output
 
 ---
 
@@ -463,4 +460,29 @@ UC13 improves maintainability, removes duplication, and keeps full backward comp
   🔗 *Code Link:*  
 👉 [UC-13](https://github.com/keshavvyadavv/Quantity-Measurement/tree/feature/UC13-Arithmetic-DRY/src)
 
+---
+
+# UC14 – Temperature with Selective Arithmetic Support
+
+## Description
+UC14 adds **Temperature (Celsius, Fahrenheit, Kelvin)** to the Quantity system.
+
+Temperature supports:
+- Equality comparison
+- Unit conversion
+
+Temperature does NOT support:
+- Addition
+- Subtraction
+- Division
+
+## Key Changes
+- Refactored `IMeasurable` using default methods
+- Added `SupportsArithmetic` functional interface
+- `TemperatureUnit` overrides arithmetic validation
+- `Quantity` checks operation support before execution
+- Fully backward compatible (UC1–UC13 unchanged)
+
+  🔗 *Code Link:*  
+👉 [UC-14](https://github.com/keshavvyadavv/Quantity-Measurement/tree/feature/UC14-TemperaturE-Measurement/src)
 ---
