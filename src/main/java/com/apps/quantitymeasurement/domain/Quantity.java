@@ -2,75 +2,63 @@ package com.apps.quantitymeasurement.domain;
 
 import java.util.Objects;
 
+import java.util.Objects;
 
-public class Quantity {
-	private final double value;
-	private final LengthUnit unit;
-	private static final double EPSILON = 1e-6;
-	
-	public Quantity(double value , LengthUnit unit) {
-		if (!Double.isFinite(value)) {
-            throw new IllegalArgumentException("Invalid numeric value");
-        }
-        if (unit == null) {
-            throw new IllegalArgumentException("Unit cannot be null");
-        }
+public class Quantity<U extends IMeasurable> {
+
+    private static final double EPSILON = 1e-6;
+
+    private final double value;
+    private final U unit;
+
+    public Quantity(double value, U unit) {
         this.value = value;
         this.unit = unit;
-	}
-	
-	
-	public double getValue() {
-		return value;
-	}
-	
-	 
-	private double toBase() {
-		return value * unit.getConversionFactor();	
-    }
-	
-	public Quantity add(Quantity other) {
-        return add(other, this.unit);
-    }
-	
-	public Quantity add(Quantity other, LengthUnit targetUnit) {
-        if (other == null || targetUnit == null) {
-            throw new IllegalArgumentException("Null not allowed");
-        }
-
-        double sumBase = this.toBase() + other.toBase();
-        double result = sumBase / targetUnit.getConversionFactor();
-
-        return new Quantity(result, targetUnit);
     }
 
-	public Quantity convertTo(LengthUnit targetUnit) {
-        if (targetUnit == null) {
-            throw new IllegalArgumentException("Target unit cannot be null");
-        }
-
-        double baseValue = this.toBase();
-        double converted = targetUnit.convertFromBaseUnit(baseValue);
-
-        return new Quantity(converted, targetUnit);
+    public double getValue() {
+        return value;
     }
-	@Override
-	public boolean equals(Object obj) {
+
+    public U getUnit() {
+        return unit;
+    }
+
+    public Quantity<U> convertTo(U targetUnit) {
+        double baseValue = unit.toBaseUnit(value);
+        double converted = targetUnit.fromBaseUnit(baseValue);
+        return new Quantity<>(converted, targetUnit);
+    }
+
+    public Quantity<U> add(Quantity<U> other) {
+        double base1 = unit.toBaseUnit(this.value);
+        double base2 = other.unit.toBaseUnit(other.value);
+        double sumBase = base1 + base2;
+        double result = unit.fromBaseUnit(sumBase);
+        return new Quantity<>(result, unit);
+    }
+
+    public Quantity<U> add(Quantity<U> other, U targetUnit) {
+        double base1 = unit.toBaseUnit(this.value);
+        double base2 = other.unit.toBaseUnit(other.value);
+        double sumBase = base1 + base2;
+        double result = targetUnit.fromBaseUnit(sumBase);
+        return new Quantity<>(result, targetUnit);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Quantity)) return false;
+        if (!(obj instanceof Quantity<?> other)) return false;
 
-        Quantity other = (Quantity) obj;
+        double base1 = unit.toBaseUnit(this.value);
+        double base2 = ((IMeasurable) other.unit).toBaseUnit(other.value);
 
-        return Math.abs(this.toBase() - other.toBase()) < EPSILON;
+        return Math.abs(base1 - base2) < EPSILON;
     }
-	
-	@Override 
-	public int hashCode() {
-		return Objects.hash(this.toBase());
-	}
-	
-	@Override
-	public String toString() {
-		return value + " " + unit.name().toLowerCase();
-	}
-}	
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(unit.toBaseUnit(value));
+    }
+}

@@ -1,35 +1,30 @@
 package com.apps.quantitymeasurement.app;
 import java.util.Scanner;
 
-import com.apps.quantitymeasurement.domain.Length;
 import com.apps.quantitymeasurement.domain.LengthUnit;
 import com.apps.quantitymeasurement.domain.Quantity;
-import com.apps.quantitymeasurement.domain.QuantityWeight;
 import com.apps.quantitymeasurement.domain.WeightUnit;
 public class QuantityMeasurementApp {
 	
 	public static void main(String[] args) {
-		QuantityWeight w1 = new QuantityWeight(1.0,  WeightUnit.KILOGRAM);
-        QuantityWeight w2 = new QuantityWeight(1000.0 , WeightUnit.GRAM);
+		 Quantity<LengthUnit> oneFeet =
+	                new Quantity<>(1, LengthUnit.FEET);
 
-        System.out.println("1 kg equals 1000 g ??");
-        System.out.println(w1.equals(w2));
+	        Quantity<LengthUnit> twelveInches = new Quantity<>(12, LengthUnit.INCHES);
 
-        System.out.println();
+	        System.out.println(oneFeet.equals(twelveInches));  
 
-        QuantityWeight w3 = new QuantityWeight(2.0, WeightUnit.POUND);
-        System.out.println("2 pounds to kg:");
-        System.out.println(w3.convertTo(WeightUnit.KILOGRAM));
+	        Quantity<LengthUnit> result = oneFeet.add(twelveInches);
 
-        System.out.println();
+	        System.out.println(result.getValue() + " FEET");   
+	        Quantity<WeightUnit> oneKg = new Quantity<>(1, WeightUnit.KILOGRAM);
 
-        QuantityWeight w4 = new QuantityWeight(500.0, WeightUnit.GRAM);
-        System.out.println("1 kg + 500 g:");
-        System.out.println(w1.add(w4));
+	        Quantity<WeightUnit> thousandGram = new Quantity<>(1000, WeightUnit.GRAM);
 
-        System.out.println();
+	        System.out.println(oneKg.equals(thousandGram));   
 
-        System.out.println("1 kg + 1000 g (in GRAM):");
-        System.out.println(w1.add(w2, WeightUnit.GRAM));
+	        Quantity<WeightUnit> weightResult = oneKg.add(thousandGram);
+
+	        System.out.println(weightResult.getValue() + " KG"); 	
 	}
 }
