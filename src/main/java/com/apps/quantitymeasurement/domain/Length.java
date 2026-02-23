@@ -64,7 +64,10 @@ public class Length {
         double baseValue = value * source.getConversionFactor();
         return baseValue / target.getConversionFactor();
     }
-
+    
+    private double toBase() {
+        return this.value * this.unit.getConversionFactor();
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -103,5 +106,6 @@ public class Length {
         public double getConversionFactor() {
             return conversionFactor;
         }
+        
     }
 }
