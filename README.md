@@ -1,73 +1,21 @@
-# 📏 QuantityMeasurement - Feet
+# UC14 – Temperature with Selective Arithmetic Support
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+## Description
+UC14 adds **Temperature (Celsius, Fahrenheit, Kelvin)** to the Quantity system.
 
----
+Temperature supports:
+- Equality comparison
+- Unit conversion
 
-## Features
+Temperature does NOT support:
+- Addition
+- Subtraction
+- Division
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+## Key Changes
+- Refactored `IMeasurable` using default methods
+- Added `SupportsArithmetic` functional interface
+- `TemperatureUnit` overrides arithmetic validation
+- `Quantity` checks operation support before execution
+- Fully backward compatible (UC1–UC13 unchanged)
 
----
-
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
-
-```
-
----
-
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
-
----
