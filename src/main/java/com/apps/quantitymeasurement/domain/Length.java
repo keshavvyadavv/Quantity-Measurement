@@ -25,7 +25,23 @@ public class Length {
     public LengthUnit getUnit() {
         return unit;
     }
+    
+    public Length add(Length other) {
+        if (other == null)
+            throw new IllegalArgumentException("Cannot add null length");
 
+        double thisBase = this.value * this.unit.getConversionFactor();
+        double otherBase = other.value * other.unit.getConversionFactor();
+
+        double sumBase = thisBase + otherBase;
+
+        double resultValue = sumBase / this.unit.getConversionFactor();
+
+        return new Length(resultValue, this.unit);
+    }
+
+    
+    
     public Length convertTo(LengthUnit targetUnit) {
         if (targetUnit == null) {
             throw new IllegalArgumentException("Target unit cannot be null");
