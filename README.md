@@ -1,73 +1,27 @@
-# 📏 QuantityMeasurement - Feet
+# UC11 – Volume Measurement (Litre, Millilitre, Gallon)
 
-A simple Java application to measure and compare quantities in **Feet** using clean design and unit testing.
+## Description
+UC11 extends the Generic Quantity system (UC10) to support **Volume measurements** using the existing:
+
+---
+
+## Supported Volume Units
+
+- **LITRE (L)** – Base Unit  
+- **MILLILITRE (mL)** → 1 L = 1000 mL  
+- **GALLON (gal)** → 1 gal ≈ 3.78541 L  
 
 ---
 
 ## Features
 
-- Immutable `Feet` class  
-- Factory method `fromString()`  
-- Custom exception `InvalidFeetException`  
-- Proper `equals()` and `hashCode()` implementation  
-- Unit testing using JUnit 5  
+- Equality comparison (cross-unit supported)
+- Unit conversion
+- Addition (implicit & explicit target unit)
+- Cross-category comparison prevented
+- Immutable design
+- Fully backward compatible (UC1–UC10)
 
 ---
 
-```
-## 📂 Folder Structure
-
-Quantity-Measurement
-│
-├── .mvn/
-│
-├── src/
-│   ├── main/
-│   │   └── java/
-│   │       └── com/
-│   │           └── apps/
-│   │               └── quantitymeasurement/
-│   │                   ├── app/
-│   │                   │   └── QuantityMeasurementApp.java
-│   │                   │
-│   │                   └── domain/
-│   │                       ├── Feet.java
-│   │                       └── InvalidFeetException.java
-│   │
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── apps/
-│                   └── quantitymeasurement/
-│                       └── domain/
-│                           └── FeetTest.java
-│
-├── .gitignore
-├── pom.xml
-└── README.md
-
-```
-
----
-
-## Test Cases Covered
-
-- Same value comparison  
-- Different value comparison  
-- Null comparison  
-- Different type comparison  
-- Valid string input  
-- Invalid string input (Exception case)  
-
----
-
-## Example Output
-
----
-
-## Technologies Used
-
-- Java  
-- JUnit 5  
-
----
+## Folder Structure
