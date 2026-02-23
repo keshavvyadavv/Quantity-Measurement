@@ -56,7 +56,12 @@ public class Quantity<U extends IMeasurable> {
 
         return Math.abs(base1 - base2) < EPSILON;
     }
-
+    
+    @Override
+    public String toString() {
+        return String.format("%.2f %s", value, unit);
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(unit.toBaseUnit(value));

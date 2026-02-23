@@ -3,28 +3,31 @@ import java.util.Scanner;
 
 import com.apps.quantitymeasurement.domain.LengthUnit;
 import com.apps.quantitymeasurement.domain.Quantity;
+import com.apps.quantitymeasurement.domain.VolumeUnit;
 import com.apps.quantitymeasurement.domain.WeightUnit;
 public class QuantityMeasurementApp {
 	
 	public static void main(String[] args) {
-		 Quantity<LengthUnit> oneFeet =
-	                new Quantity<>(1, LengthUnit.FEET);
+	
+		Quantity<VolumeUnit> oneLitre = new Quantity<>(1.0, VolumeUnit.LITRE);
 
-	        Quantity<LengthUnit> twelveInches = new Quantity<>(12, LengthUnit.INCHES);
+        Quantity<VolumeUnit> thousandML = new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
 
-	        System.out.println(oneFeet.equals(twelveInches));  
+        Quantity<VolumeUnit> oneGallon = new Quantity<>(1.0, VolumeUnit.GALLON);
 
-	        Quantity<LengthUnit> result = oneFeet.add(twelveInches);
+        System.out.println(oneLitre.equals(thousandML));   
+        System.out.println(oneGallon.equals(new Quantity<>(3.78541, VolumeUnit.LITRE))); 
 
-	        System.out.println(result.getValue() + " FEET");   
-	        Quantity<WeightUnit> oneKg = new Quantity<>(1, WeightUnit.KILOGRAM);
+        System.out.println(oneLitre.convertTo(VolumeUnit.MILLILITRE));
+        System.out.println(oneGallon.convertTo(VolumeUnit.LITRE));
 
-	        Quantity<WeightUnit> thousandGram = new Quantity<>(1000, WeightUnit.GRAM);
+        System.out.println(oneLitre.add(thousandML));
 
-	        System.out.println(oneKg.equals(thousandGram));   
+        System.out.println(oneLitre.add(oneGallon, VolumeUnit.MILLILITRE));
 
-	        Quantity<WeightUnit> weightResult = oneKg.add(thousandGram);
+        Quantity<LengthUnit> oneFoot = new Quantity<>(1.0, LengthUnit.FEET);
 
-	        System.out.println(weightResult.getValue() + " KG"); 	
+        System.out.println(oneLitre.equals(oneFoot)); 
+		
 	}
 }
