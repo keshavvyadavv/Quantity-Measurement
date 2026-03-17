@@ -10,7 +10,7 @@ import com.apps.core.WeightUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuantityTest {
+public class QuantityMeasurementAppTest {
 
 	// ================================
 	// LENGTH ENUM TESTS
