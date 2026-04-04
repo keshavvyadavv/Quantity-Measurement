@@ -1,28 +1,25 @@
 server:
   port: ${PORT:8080}
+  address: 0.0.0.0
 
 spring:
   application:
     name: security-service
 
-  # MySQL Database
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
-  # JPA / Hibernate
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
 
-  # GitHub OAuth2
   security:
     oauth2:
       client:
@@ -32,22 +29,21 @@ spring:
             client-secret: ${GITHUB_CLIENT_SECRET}
             scope: user:email
 
-# JWT Config
 jwt:
   secret: ${JWT_SECRET}
   expiration: 86400000
 
-# Eureka Client
 eureka:
   client:
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
       defaultZone: ${EUREKA_SERVER_URL}
   instance:
     prefer-ip-address: false
 
-# Actuator
 management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health,info
