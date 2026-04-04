@@ -8,12 +8,13 @@ spring:
   cloud:
     gateway:
       globalcors:
+        add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
             allowedOrigins:
-              - http://localhost:5173
-              - http://localhost:3000
-              - ${FRONTEND_URL}
+              - "http://localhost:5173"
+              - "http://localhost:3000"
+              - "${FRONTEND_URL}"
             allowedMethods:
               - GET
               - POST
@@ -26,16 +27,16 @@ spring:
 
       routes:
         - id: security-service-auth
-          uri: lb://security-service
+          uri: lb://SECURITY-SERVICE
           predicates:
-            - Path=/auth/**
+            - Path=/auth/**,/oauth2/**,/login/oauth2/**
           filters:
             - name: JwtAuthenticationFilter
               args:
                 secured: false
 
         - id: quantity-measurement-app
-          uri: lb://quantity-measurement-app
+          uri: lb://QUANTITY-MEASUREMENT-APP
           predicates:
             - Path=/api/v1/quantities/**
           filters:
