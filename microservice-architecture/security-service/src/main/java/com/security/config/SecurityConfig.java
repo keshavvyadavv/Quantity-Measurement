@@ -42,7 +42,7 @@ public class SecurityConfig {
                     "/actuator/**",
                     "/swagger-ui.html",
                     "/v3/api-docs/**",
-                    "/**"          // ← temporarily allow all to debug
+                    "/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
@@ -77,7 +77,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", source);
+        source.registerCorsConfiguration("/**", config); 
         return source;
     }
 
