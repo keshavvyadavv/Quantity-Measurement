@@ -28,10 +28,6 @@ spring:
           uri: ${SECURITY_SERVICE_URL}
           predicates:
             - Path=/auth/**, /oauth2/**, /login/oauth2/**
-          filters:
-            - name: JwtAuthenticationFilter
-              args:
-                secured: false
 
         - id: quantity-measurement-service
           uri: ${QUANTITY_SERVICE_URL}
