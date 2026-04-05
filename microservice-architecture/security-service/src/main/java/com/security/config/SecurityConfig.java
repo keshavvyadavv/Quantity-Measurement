@@ -4,6 +4,7 @@ import com.security.security.JwtAuthFilter;
 import com.security.security.OAuth2SuccessHandler;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -24,20 +25,24 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/auth/**",
+                    "/oauth2/**",
+                    "/login/oauth2/**",
                     "/swagger-ui/**",
-                    "/actuator/health", 
-                    "/actuator/info",
+                    "/actuator/**",
                     "/swagger-ui.html",
-                    "/v3/api-docs/**"
+                    "/v3/api-docs/**",
+                    "/**"          // ← temporarily allow all to debug
                 ).permitAll()
                 .anyRequest().authenticated()
             )
@@ -60,6 +65,23 @@ public class SecurityConfig {
     }
 
     @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of(
+            "http://localhost:5173",
+            "http://localhost:3000",
+            frontendUrl
+        ));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", source);
+        return source;
+    }
+
+    @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -69,17 +91,4 @@ public class SecurityConfig {
             throws Exception {
         return config.getAuthenticationManager();
     }
-
-   @Bean
-   CorsConfigurationSource corsConfigurationSource() {
-       CorsConfiguration config = new CorsConfiguration();
-       config.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:5173"));
-       config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-       config.setAllowedHeaders(List.of("*"));
-       config.setAllowCredentials(true);
-
-       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-       source.registerCorsConfiguration("/**", config);
-       return source;
-   }
 }
