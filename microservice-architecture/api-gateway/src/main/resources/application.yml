@@ -24,6 +24,7 @@ spring:
             allowedHeaders:
               - "*"
             allowCredentials: true
+            maxAge: 3600
 
       routes:
         - id: security-service-auth
@@ -52,7 +53,7 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_SERVER_URL}
   instance:
-    prefer-ip-address: false
+    prefer-ip-address: true
 
 management:
   endpoints:
