@@ -11,10 +11,9 @@ spring:
         cors-configurations:
           '[/**]':
             allowedOriginPatterns:
-              - http://localhost:5173
-              - http://localhost:3000
-              - https://*.onrender.com
-              - ${FRONTEND_URL:http://localhost:5173}
+              - "http://localhost:5173"
+              - "http://localhost:3000"
+              - "https://*.onrender.com"
             allowedMethods:
               - GET
               - POST
@@ -25,8 +24,7 @@ spring:
             allowedHeaders:
               - "*"
             exposedHeaders:
-              - Authorization
-              - Content-Type
+              - "Authorization"
             allowCredentials: true
             maxAge: 3600
 
@@ -38,8 +36,6 @@ spring:
           uri: ${SECURITY_SERVICE_URL}
           predicates:
             - Path=/auth/**,/oauth2/**,/login/oauth2/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /auth/${segment}
 
         - id: quantity-measurement-service
           uri: ${QUANTITY_SERVICE_URL}
@@ -50,16 +46,14 @@ spring:
               args:
                 secured: true
 
-jwt:
-  secret: ${JWT_SECRET}
-
 eureka:
   client:
     enabled: false
     register-with-eureka: false
     fetch-registry: false
-  instance:
-    prefer-ip-address: false
+
+jwt:
+  secret: ${JWT_SECRET}
 
 management:
   endpoints:
@@ -69,3 +63,4 @@ management:
   endpoint:
     health:
       show-details: always
+      
