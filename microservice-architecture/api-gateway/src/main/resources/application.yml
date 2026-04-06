@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:10000}
 
 spring:
   application:
@@ -10,26 +10,36 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins:
-              - "http://localhost:5173"
-              - "http://localhost:3000"
-              - "${FRONTEND_URL}"
+            allowedOriginPatterns:
+              - http://localhost:5173
+              - http://localhost:3000
+              - https://*.onrender.com
+              - ${FRONTEND_URL:http://localhost:5173}
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
               - OPTIONS
+              - PATCH
             allowedHeaders:
               - "*"
+            exposedHeaders:
+              - Authorization
+              - Content-Type
             allowCredentials: true
             maxAge: 3600
+
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
 
       routes:
         - id: security-service-public
           uri: ${SECURITY_SERVICE_URL}
           predicates:
             - Path=/auth/**,/oauth2/**,/login/oauth2/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /auth/${segment}
 
         - id: quantity-measurement-service
           uri: ${QUANTITY_SERVICE_URL}
@@ -46,9 +56,16 @@ jwt:
 eureka:
   client:
     enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    prefer-ip-address: false
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+  endpoint:
+    health:
+      show-details: always
