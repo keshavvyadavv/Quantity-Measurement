@@ -8,9 +8,11 @@ spring:
   cloud:
     gateway:
       globalcors:
-        corsConfigurations:
+        cors-configurations:
           '[/**]':
             allowedOrigins:
+              - "http://localhost:5173"
+              - "http://localhost:3000"
               - "${FRONTEND_URL}"
             allowedMethods:
               - GET
@@ -27,7 +29,7 @@ spring:
         - id: security-service-public
           uri: ${SECURITY_SERVICE_URL}
           predicates:
-            - Path=/auth/**, /oauth2/**, /login/oauth2/**
+            - Path=/auth/**,/oauth2/**,/login/oauth2/**
 
         - id: quantity-measurement-service
           uri: ${QUANTITY_SERVICE_URL}
@@ -49,4 +51,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health,info
