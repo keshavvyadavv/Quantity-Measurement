@@ -29,7 +29,6 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // ✅ CORS handled here to allow gateway to forward requests
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
@@ -65,8 +64,6 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-
-        // ✅ allowedOriginPatterns supports wildcards + allowCredentials
         config.setAllowedOriginPatterns(List.of(
             "http://localhost:5173",
             "http://localhost:3000",
